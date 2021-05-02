@@ -23,6 +23,8 @@ public class language_refresh : MonoBehaviour
     public GameObject another_image_manager;
     public GameObject before_speech;
 
+    public GameObject instagemanager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,8 @@ public class language_refresh : MonoBehaviour
 
     public void refresh()
     {
-        change_image.SetActive(true);
+        if(instagemanager.GetComponent<title_anima>().a[stage_num * 3])
+            change_image.SetActive(true);
         before_speech.SetActive(true);
         another_image_manager.GetComponent<default_image_manager>().change_default_image();
         for (int i = 0; i < off_resources[stage_num].Map.Length; i++)
