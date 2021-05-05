@@ -419,7 +419,7 @@ public class guide_manage : MonoBehaviour
                     }
                     break;
                 case 9:
-
+                    this.gameObject.SetActive(false);
                     break;
                 default:
                     this.gameObject.SetActive(false);
