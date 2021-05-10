@@ -31,8 +31,8 @@ public class guide_manage : MonoBehaviour
     public GameObject var_btn;
     public GameObject if_btn;
 
-    Vector2 loc_Qtext_before = new Vector2(371, 360);
-    Vector2 loc_Qtext = new Vector2(538, 403);
+    Vector2 loc_Qtext_before = new Vector2(371, 390);
+    Vector2 loc_Qtext = new Vector2(538, 393);
     Vector2 loc_printf = new Vector2(250, 334);
     Vector2 loc_scanf = new Vector2(250, 248);
     Vector2 loc_oper = new Vector2(291, 165);
@@ -45,6 +45,7 @@ public class guide_manage : MonoBehaviour
     Vector2 loc_func = new Vector2(254, -397);
     Vector2 loc_play = new Vector2(-316, -400);
     Vector2 loc_exit = new Vector2(-718, 426);
+    Vector2 loc_next = new Vector2(-47, -60);
 
     bool ison = false;
 
@@ -85,10 +86,15 @@ public class guide_manage : MonoBehaviour
                         click(loc_play);
                         
                     }
+                    else if(Play.GetComponent<Language_script>().iscleared == true)
+                    {
+                        click(loc_next);
+                    }
+                    /*
                     else
                     {
                         click(loc_exit);
-                    }
+                    }*/
                     break;
 
                 case 1:
@@ -120,10 +126,15 @@ public class guide_manage : MonoBehaviour
                         Vector2 loc = new Vector2(490, 201);
                         drag(loc_var, loc);
                     }
+                    else if (Play.GetComponent<Language_script>().iscleared == true)
+                    {
+                        click(loc_next);
+                    }
                     else
                     {
                         click(loc_play);
                     }
+
                     break;
                 case 2:
 
@@ -136,6 +147,10 @@ public class guide_manage : MonoBehaviour
                     {
                         Vector2 loc = new Vector2(555, 259);
                         drag(loc_const_int, loc);
+                    }
+                    else if (Play.GetComponent<Language_script>().iscleared == true)
+                    {
+                        click(loc_next);
                     }
                     else
                     {
@@ -171,6 +186,10 @@ public class guide_manage : MonoBehaviour
                         Vector2 loc = new Vector2(490, 201);
                         drag(loc_var, loc);
                     }
+                    else if (Play.GetComponent<Language_script>().iscleared == true)
+                    {
+                        click(loc_next);
+                    }
                     else
                     {
                         click(loc_play);
@@ -199,6 +218,10 @@ public class guide_manage : MonoBehaviour
                         Vector2 loc = new Vector2(490, 201);
                         drag(loc_var, loc);
                     }
+                    else if (Play.GetComponent<Language_script>().iscleared == true)
+                    {
+                        click(loc_next);
+                    }
                     else
                     {
                         click(loc_play);
@@ -225,21 +248,21 @@ public class guide_manage : MonoBehaviour
                     {
                         click(loc_oper);
                     }
-                    else if(first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 25)
+                    else if (first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 25)
                     {
                         Vector2 loc = new Vector2(620, 259);
                         drag(loc_oper, loc);
                     }
-                    else if(const_int_btn.transform.GetChild(0).GetComponent<Text>().text != "0307")
+                    else if (const_int_btn.transform.GetChild(0).GetComponent<Text>().text != "0307")
                     {
                         click(loc_const_int);
                     }
-                    else if(first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
+                    else if (first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
                     {
                         Vector2 loc = new Vector2(700, 259);
                         drag(loc_const_int, loc);
                     }
-                    else if(first_blk.GetComponent<BlkOnNoteComp>().DownBlk != 1)
+                    else if (first_blk.GetComponent<BlkOnNoteComp>().DownBlk != 1)
                     {
                         Vector2 loc = new Vector2(364, 201);
                         drag(loc_printf, loc);
@@ -248,6 +271,10 @@ public class guide_manage : MonoBehaviour
                     {
                         Vector2 loc = new Vector2(490, 201);
                         drag(loc_var, loc);
+                    }
+                    else if (Play.GetComponent<Language_script>().iscleared == true)
+                    {
+                        click(loc_next);
                     }
                     else
                     {
@@ -348,6 +375,10 @@ public class guide_manage : MonoBehaviour
                         Vector2 loc = new Vector2(490, 116);
                         drag(loc_var, loc);
                     }
+                    else if (Play.GetComponent<Language_script>().iscleared == true)
+                    {
+                        click(loc_next);
+                    }
                     else
                     {
                         click(loc_play);
@@ -412,6 +443,10 @@ public class guide_manage : MonoBehaviour
                         Vector2 loc = new Vector2(364, 49);
                         drag(loc_if, loc);
                     }
+                    else if (Play.GetComponent<Language_script>().iscleared == true)
+                    {
+                        click(loc_next);
+                    }
                     else
                     {
                         click(loc_play);
@@ -469,7 +504,7 @@ public class guide_manage : MonoBehaviour
     // end 위치에서 클릭하는 모션을 취합니다.
     void click(Vector2 end)
     {
-        Vector2 offset = new Vector2(-2f, 2f);
+        Vector2 offset = new Vector2(-5f, 5f);
         drag(end, end + offset, 0.05f);
         if (end == loc_Qtext)
             gameObject.GetComponent<RectTransform>().rotation = new Quaternion(0, 0, -1f, 0);

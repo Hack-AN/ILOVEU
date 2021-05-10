@@ -29,6 +29,8 @@ public class intro_manage : MonoBehaviour
     public intro_per_stage[] a; // 각 a는 총 3개의 이미지가 서로 돌아가면서 애니메이션을 연출합니다.
     public AudioSource page_sound;
 
+    public GameObject next_btn;
+
     bool scene_swch = true;
 
     float fades = 0f;
@@ -55,6 +57,11 @@ public class intro_manage : MonoBehaviour
     void Update()
     {
 
+        if(count >= a[stage_number].empty.Length - 1)
+        {
+            next_btn.SetActive(false);
+        }
+
         if (a[stage_number].empty.Length != 0)
         {
             time += Time.deltaTime;
@@ -64,7 +71,7 @@ public class intro_manage : MonoBehaviour
             {
                 if (count >= a[stage_number].empty.Length - 1)
                 {
-
+                    next_btn.SetActive(false);
                     page_sound.Play();
                     SceneManager.LoadScene("prob_iloveu");
                 }
@@ -91,4 +98,12 @@ public class intro_manage : MonoBehaviour
         }
         
     }
+
+
+    public void next_page()
+    {
+        count++;
+        _time = 0;
+    }
+
 }

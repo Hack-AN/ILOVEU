@@ -96,6 +96,13 @@ public class Language_script : MonoBehaviour
 
     bool if_tuto = false;
 
+    public GameObject success_window;
+
+    public bool iscleared = false;
+
+    public Sprite solve_if;
+    public Sprite not_solve_if;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -326,6 +333,10 @@ public class Language_script : MonoBehaviour
                                
                             }
                         }
+                        else
+                        {
+                            present_blk.GetComponent<Image>().sprite = solve_if;
+                        }
                     }
                     else
                     {
@@ -353,6 +364,10 @@ public class Language_script : MonoBehaviour
                                 present_blk = present_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn;
                                
                             }
+                        }
+                        else
+                        {
+                            present_blk.GetComponent<Image>().sprite = solve_if;
                         }
                     }
                     
@@ -630,14 +645,23 @@ public class Language_script : MonoBehaviour
                 break;
             }
 
+            
             // 위에서 설명한 대로 특정 블록에 한해서만 1.5초를 대기하고 다음 줄로 넘어갑니다.
             // 실제 액션이 화면에 애니메이팅 되는 printf, scanf 블록일 경우에만 1.5초 대기 후 다음 줄로 넘어갑니다.
             switch(present_blk.GetComponent<BlkOnNoteComp>().thisBlk)
             {
+                
                 case 1:
                 case 2:
+                case 3:
+                case 4:
                     yield return new WaitForSeconds(1.5f);
+
+                    if (present_blk.GetComponent<BlkOnNoteComp>().thisBlk == 3)
+                        present_blk.GetComponent<Image>().sprite = not_solve_if;
+
                     break;
+
                 default:
                     break;
             }
@@ -781,6 +805,7 @@ public class Language_script : MonoBehaviour
     {
         audiosource.clip = success_clip;
         audiosource.Play();
+        open_success_window();
     }
 
     // 실패 시 효과음 출력
@@ -788,6 +813,12 @@ public class Language_script : MonoBehaviour
     {
         audiosource.clip = fail_clip;
         audiosource.Play();
+    }
+
+    void open_success_window()
+    {
+        success_window.SetActive(true);
+        iscleared = true;
     }
 
     // 스테이지별로 scanf로 입력받게 될 값을 설정하고 해당 말풍선을 활성화합니다.
