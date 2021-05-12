@@ -55,7 +55,7 @@ public class Map2D_lang
 
 public class Language_script : MonoBehaviour
 {
-
+    public GameObject click_more;
     public GameObject present_blk;
     public GameObject change_image;
     public Map2D_lang[] etc_objs;
@@ -102,6 +102,10 @@ public class Language_script : MonoBehaviour
 
     public Sprite solve_if;
     public Sprite not_solve_if;
+
+    bool stage_9_isdone = false;
+    bool stage_9_isdone1 = false;
+    bool stage_9_isdone2 = false;
 
     // Start is called before the first frame update
     void Start()
@@ -696,9 +700,11 @@ public class Language_script : MonoBehaviour
                 break;
             case 7:
                 success_8();
+                
                 break;
             case 8:
                 success_9();
+                click_more.SetActive(true);
                 break;
             case 9:
                 success_10();
@@ -817,8 +823,24 @@ public class Language_script : MonoBehaviour
 
     void open_success_window()
     {
-        success_window.SetActive(true);
-        iscleared = true;
+
+        switch(stage_num)
+        {
+            case 8:
+                if(stage_9_isdone)
+                {
+                    success_window.SetActive(true);
+                    iscleared = true;
+                }
+                    
+                break;
+            default:
+                success_window.SetActive(true);
+                iscleared = true;
+                break;
+        }
+
+        
     }
 
     // 스테이지별로 scanf로 입력받게 될 값을 설정하고 해당 말풍선을 활성화합니다.
@@ -1052,7 +1074,14 @@ public class Language_script : MonoBehaviour
 
             if (condition1 || condition2)
             {
+                if (condition1)
+                    stage_9_isdone1 = true;
+                if (condition2)
+                    stage_9_isdone2 = true;
+                if (stage_9_isdone1 && stage_9_isdone2)
+                    stage_9_isdone = true;
                 success_sound();
+
                 //update_cleared_stage_num();
             }
             else

@@ -12,10 +12,12 @@ using UnityEngine.UI;
 
 public class select_const_or_oper : MonoBehaviour
 {
-    int numbering;
+    public int numbering;
     public Sprite[] btn_array;
     int stage_num;
     bool only_assign = false;
+    public GameObject choice_window;
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +45,9 @@ public class select_const_or_oper : MonoBehaviour
 
     public void change_const_or_oper()
     {
-        if(!only_assign)
+        if (!only_assign)
+            choice_window.SetActive(true);
+            /*
             if (this.CompareTag("block"))
             {
                 if (numbering == 30)
@@ -60,7 +64,7 @@ public class select_const_or_oper : MonoBehaviour
                 numbering = ++this.gameObject.GetComponent<BlkOnNoteComp>().thisBlk;
                 this.gameObject.GetComponent<Image>().sprite = btn_array[numbering - 23];
             }
-
+            */
 
 
     }

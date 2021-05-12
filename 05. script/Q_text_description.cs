@@ -78,9 +78,7 @@ public class Q_text_description : MonoBehaviour
                                                                                     "\"I must find you.\"라고 말하자.";
                 break;
             case 9:
-                description_note.transform.GetChild(0).GetComponent<Text>().text = "여자친구가 질투하는 듯 하다. 그녀는\n" +
-                                                                                    "\"You like me?\" 혹은\n" +
-                                                                                    "\"You like her?\"라고 물어본다.\n" +
+                description_note.transform.GetChild(0).GetComponent<Text>().text = "여자친구가 질투하는 듯 하다. 그녀가\n" +
                                                                                     "\"You like me?\"라고 물어보면\n" +
                                                                                     "\"Of course.\"라고,\n" +
                                                                                     "\"You like her?\"라고 물어보면\n" +

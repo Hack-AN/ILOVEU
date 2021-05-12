@@ -20,22 +20,43 @@ public class select_const : MonoBehaviour
     public int[] string_num_per_stage;  // 최솟값이 0, 최댓값이 3. ( 0이면 string의 개수가 1개라는 뜻, 1이면 2개, 2면 3개, 3이면 4개)
     int temp;
     BoxCollider2D this_col;
+    public GameObject choice_window;
+    bool only_one_option = false;
+
     // Start is called before the first frame update
     void Start()
     {
         stage_num = GameObject.Find("StageNum").GetComponent<stageNum>().stage_number;
         temp = stage_num * 4;
         pub_text.GetComponent<Text>().text = arr_str[temp];
+
+        switch(stage_num)
+        {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                only_one_option = true;
+                break;
+        }
     }
 
     // 버튼을 누르면 다음 옵션으로 넘어갑니다.
     public void change_const()
     {
+        if(!only_one_option)
+            choice_window.SetActive(true);
+
+        /*
         temp++;
         if (temp == stage_num * 4 + string_num_per_stage[stage_num] + 1)
             temp = stage_num * 4;
         pub_text.GetComponent<Text>().text = arr_str[temp];
-
+        */
 
     }
+
+
 }

@@ -19,7 +19,7 @@ public class guide_manage : MonoBehaviour
     bool isbig = false;
     int stage_num;
 
-    public GameObject click_more;
+    
 
     public GameObject Qtext;
     public GameObject Play;
@@ -30,22 +30,34 @@ public class guide_manage : MonoBehaviour
     public GameObject const_string_btn;
     public GameObject var_btn;
     public GameObject if_btn;
+    public GameObject oper_window;
+    public GameObject int_window;
+    public GameObject string_window;
 
-    Vector2 loc_Qtext_before = new Vector2(371, 390);
+    Vector2 loc_Qtext_before = new Vector2(351, 380);
     Vector2 loc_Qtext = new Vector2(538, 393);
     Vector2 loc_printf = new Vector2(250, 334);
     Vector2 loc_scanf = new Vector2(250, 248);
-    Vector2 loc_oper = new Vector2(291, 165);
-    Vector2 loc_const_int = new Vector2(291, 83);
+    Vector2 loc_oper = new Vector2(321, 135);
+    Vector2 loc_const_int = new Vector2(311, 63);
     Vector2 loc_const_string = new Vector2(291, 7);
-    Vector2 loc_var = new Vector2(258, -78);
+    Vector2 loc_var = new Vector2(298, -88);
     Vector2 loc_arr = new Vector2(258, -160);
     Vector2 loc_if = new Vector2(254, -242);
     Vector2 loc_loop = new Vector2(254, -327);
     Vector2 loc_func = new Vector2(254, -397);
     Vector2 loc_play = new Vector2(-316, -400);
     Vector2 loc_exit = new Vector2(-718, 426);
-    Vector2 loc_next = new Vector2(-47, -60);
+    Vector2 loc_next = new Vector2(-47, -80);
+
+    Vector2 loc_assign_ = new Vector2(0, 134);
+    Vector2 loc_plus_ = new Vector2(89, 134);
+    Vector2 loc_minus_ = new Vector2(185, 134);
+    Vector2 loc_multiply_ = new Vector2(281, 134);
+    Vector2 loc_divide_ = new Vector2(370, 134);
+    Vector2 loc_compare_ = new Vector2(453, 134);
+    Vector2 loc_left_ = new Vector2(549, 134);
+    Vector2 loc_right_ = new Vector2(645, 134);
 
     bool ison = false;
 
@@ -67,26 +79,26 @@ public class guide_manage : MonoBehaviour
         Qtext_tuto();
 
         if(Qtext_tuto_done && Qtext.activeSelf == false)
-            switch(stage_num)
+            switch (stage_num)
             {
                 case 0:
-                
-                    if(Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk != 1)
+
+                    if (Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk != 1)
                     {
                         Vector2 loc = new Vector2(364, 259);
                         drag(loc_printf, loc);
                     }
-                    else if(Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 22)
+                    else if (Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 22)
                     {
                         Vector2 loc = new Vector2(555, 259);
                         drag(loc_const_string, loc);
                     }
-                    else if(!ison && Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk == 1 && Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk == 22)
+                    else if (!ison && Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk == 1 && Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk == 22)
                     {
                         click(loc_play);
-                        
+
                     }
-                    else if(Play.GetComponent<Language_script>().iscleared == true)
+                    else if (Play.GetComponent<Language_script>().iscleared == true)
                     {
                         click(loc_next);
                     }
@@ -98,7 +110,7 @@ public class guide_manage : MonoBehaviour
                     break;
 
                 case 1:
-                
+
                     GameObject first_blk = Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn;
 
                     if (Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk != 31)
@@ -106,17 +118,17 @@ public class guide_manage : MonoBehaviour
                         Vector2 loc = new Vector2(364, 259);
                         drag(loc_var, loc);
                     }
-                    else if(Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 23)
+                    else if (Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 23)
                     {
                         Vector2 loc = new Vector2(490, 259);
                         drag(loc_oper, loc);
                     }
-                    else if(Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 22)
+                    else if (Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 22)
                     {
                         Vector2 loc = new Vector2(607, 259);
                         drag(loc_const_string, loc);
                     }
-                    else if(first_blk.GetComponent<BlkOnNoteComp>().DownBlk != 1)
+                    else if (first_blk.GetComponent<BlkOnNoteComp>().DownBlk != 1)
                     {
                         Vector2 loc = new Vector2(364, 201);
                         drag(loc_printf, loc);
@@ -234,28 +246,54 @@ public class guide_manage : MonoBehaviour
                         Vector2 loc = new Vector2(364, 259);
                         drag(loc_var, loc);
                     }
+                    else if (oper_btn.GetComponent<MoveBtn>().btn_numbering != 23 && oper_window.activeSelf == false && Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 23)
+                    {
+                        click(loc_oper);
+                    }
+                    else if (oper_window.activeSelf == true && Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 23)
+                    {
+                        click(loc_assign_);
+                    }
                     else if (Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 23)
                     {
                         Vector2 loc = new Vector2(490, 259);
                         drag(loc_oper, loc);
+                    }
+                    else if (const_int_btn.transform.GetChild(0).GetComponent<Text>().text != "0328" && int_window.activeSelf == false && Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
+                    {
+                        click(loc_const_int);
+                    }
+                    else if(int_window.activeSelf == true && Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
+                    {
+                        Vector2 loc = new Vector2(267, 55);
+                        click(loc);
                     }
                     else if (Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
                     {
                         Vector2 loc = new Vector2(607, 259);
                         drag(loc_const_int, loc);
                     }
-                    else if (oper_btn.GetComponent<MoveBtn>().btn_numbering != 25)
+                    else if (oper_btn.GetComponent<MoveBtn>().btn_numbering != 25 && oper_window.activeSelf == false && first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 25)
                     {
                         click(loc_oper);
+                    }
+                    else if (oper_window.activeSelf == true && first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 25)
+                    {
+                        click(loc_minus_);
                     }
                     else if (first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 25)
                     {
                         Vector2 loc = new Vector2(620, 259);
                         drag(loc_oper, loc);
                     }
-                    else if (const_int_btn.transform.GetChild(0).GetComponent<Text>().text != "0307")
+                    else if (const_int_btn.transform.GetChild(0).GetComponent<Text>().text != "0307" && int_window.activeSelf == false && first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
                     {
                         click(loc_const_int);
+                    }
+                    else if(int_window.activeSelf == true && first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
+                    {
+                        Vector2 loc = new Vector2(364, 55);
+                        click(loc);
                     }
                     else if (first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
                     {
@@ -283,33 +321,63 @@ public class guide_manage : MonoBehaviour
                     break;
                 case 7:
                     first_blk = Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn;
-                    if (Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk != 31)
+                    if (var_btn.transform.GetChild(0).GetComponent<Text>().text != "1" && Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk != 31)
+                    {
+                        click(loc_var);
+                    }
+                    else if (Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk != 31)
                     {
                         Vector2 loc = new Vector2(364, 259);
                         drag(loc_var, loc);
+                    }
+                    else if (oper_btn.GetComponent<MoveBtn>().btn_numbering != 23 && oper_window.activeSelf == false && Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 23)
+                    {
+                        click(loc_oper);
+                    }
+                    else if (oper_window.activeSelf == true && Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 23)
+                    {
+                        click(loc_assign_);
                     }
                     else if (Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 23)
                     {
                         Vector2 loc = new Vector2(490, 259);
                         drag(loc_oper, loc);
                     }
+                    else if (const_int_btn.transform.GetChild(0).GetComponent<Text>().text != "0328" && int_window.activeSelf == false && Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
+                    {
+                        click(loc_const_int);
+                    }
+                    else if (int_window.activeSelf == true && Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
+                    {
+                        Vector2 loc = new Vector2(267, 55);
+                        click(loc);
+                    }
                     else if (Objs[0].objs[0].GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
                     {
                         Vector2 loc = new Vector2(607, 259);
                         drag(loc_const_int, loc);
                     }
-                    else if (oper_btn.GetComponent<MoveBtn>().btn_numbering != 25 && first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 25)
+                    else if (oper_btn.GetComponent<MoveBtn>().btn_numbering != 25 && oper_window.activeSelf == false && first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 25)
                     {
                         click(loc_oper);
+                    }
+                    else if (oper_window.activeSelf == true && first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 25)
+                    {
+                        click(loc_minus_);
                     }
                     else if (first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 25)
                     {
                         Vector2 loc = new Vector2(620, 259);
                         drag(loc_oper, loc);
                     }
-                    else if (const_int_btn.transform.GetChild(0).GetComponent<Text>().text != "0307" && first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
+                    else if (const_int_btn.transform.GetChild(0).GetComponent<Text>().text != "0307" && int_window.activeSelf == false && first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
                     {
                         click(loc_const_int);
+                    }
+                    else if (int_window.activeSelf == true && first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
+                    {
+                        Vector2 loc = new Vector2(300, 55);
+                        click(loc);
                     }
                     else if (first_blk.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
                     {
@@ -325,27 +393,40 @@ public class guide_manage : MonoBehaviour
                         Vector2 loc = new Vector2(364, 201);
                         drag(loc_var, loc);
                     }
-                    else if(oper_btn.GetComponent<MoveBtn>().btn_numbering != 23 && first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 23)
+                    else if(oper_window.activeSelf == false && oper_btn.GetComponent<MoveBtn>().btn_numbering != 23 && first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 23)
                     {
                         click(loc_oper);
+                    }
+                    else if(oper_window.activeSelf == true && oper_btn.GetComponent<MoveBtn>().btn_numbering != 23 && first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 23)
+                    {
+                        click(loc_assign_);
                     }
                     else if(first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 23)
                     {
                         Vector2 loc = new Vector2(490, 201);
                         drag(loc_oper, loc);
                     }
-                    else if(const_int_btn.transform.GetChild(0).GetComponent<Text>().text != "21000")
+                    else if(int_window.activeSelf == false && const_int_btn.transform.GetChild(0).GetComponent<Text>().text != "21000")
                     {
                         click(loc_const_int);
+                    }
+                    else if(int_window.activeSelf == true && const_int_btn.transform.GetChild(0).GetComponent<Text>().text != "21000" && first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
+                    {
+                        Vector2 loc = new Vector2(384, 55);
+                        click(loc);
                     }
                     else if(first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 21)
                     {
                         Vector2 loc = new Vector2(607, 201);
                         drag(loc_const_int, loc);
                     }
-                    else if(oper_btn.GetComponent<MoveBtn>().btn_numbering != 27)
+                    else if(oper_window.activeSelf == false && oper_btn.GetComponent<MoveBtn>().btn_numbering != 27)
                     {
                         click(loc_oper);
+                    }
+                    else if(oper_window.activeSelf == true && oper_btn.GetComponent<MoveBtn>().btn_numbering != 27 && first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 27)
+                    {
+                        click(loc_divide_);
                     }
                     else if(first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 27)
                     {
@@ -396,40 +477,62 @@ public class guide_manage : MonoBehaviour
                         Vector2 loc = new Vector2(490, 259);
                         drag(loc_var, loc);
                     }
-                    else if(first_blk.GetComponent<BlkOnNoteComp>().DownBlk != 3)
+                    else if (if_btn.GetComponent<MoveBtn>().btn_numbering != 3 && first_blk.GetComponent<BlkOnNoteComp>().DownBlk != 3)
+                    {
+                        click(loc_if);
+                    }
+                    else if (first_blk.GetComponent<BlkOnNoteComp>().DownBlk != 3)
                     {
                         Vector2 loc = new Vector2(364, 201);
                         drag(loc_if, loc);
                     }
-                    else if(first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 31)
+                    else if (first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 31)
                     {
                         Vector2 loc = new Vector2(490, 201);
                         drag(loc_var, loc);
                     }
-                    else if(oper_btn.GetComponent<MoveBtn>().btn_numbering != 28)
+                    else if (oper_window.activeSelf == false && oper_btn.GetComponent<MoveBtn>().btn_numbering != 28)
                     {
                         click(loc_oper);
                     }
-                    else if(first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 28)
+                    else if (oper_window.activeSelf == true && oper_btn.GetComponent<MoveBtn>().btn_numbering != 28 && first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 28)
+                    {
+                        click(loc_compare_);
+                    }
+                    else if (first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 28)
                     {
                         Vector2 loc = new Vector2(607, 201);
                         drag(loc_oper, loc);
                     }
-                    else if(first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 22)
+                    else if (string_window.activeSelf == false && const_string_btn.transform.GetChild(0).GetComponent<Text>().text != "If I disappear..." && first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 22)
+                    {
+                        click(loc_const_string);
+                    }
+                    else if(string_window.activeSelf == true && first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 22)
+                    {
+                        Vector2 loc = new Vector2(227, -15);
+                        click(loc);
+                    }
+                    else if (first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 22)
                     {
                         Vector2 loc = new Vector2(690, 201);
                         drag(loc_const_string, loc);
                     }
-                    else if(first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().DownBlk != 1)
+                    else if (first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().DownBlk != 1)
                     {
                         Vector2 loc = new Vector2(364, 116);
                         drag(loc_printf, loc);
                     }
-                    else if(const_string_btn.transform.GetChild(0).GetComponent<Text>().text != "I must find you.")
+                    else if (string_window.activeSelf == false && const_string_btn.transform.GetChild(0).GetComponent<Text>().text != "I must find you." && first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 22)
                     {
                         click(loc_const_string);
                     }
-                    else if(first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 22)
+                    else if (string_window.activeSelf == true && first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 22)
+                    {
+                        Vector2 loc = new Vector2(527, -15);
+                        click(loc);
+                    }
+                    else if (first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().RightBlk != 22)
                     {
                         Vector2 loc = new Vector2(490, 116);
                         drag(loc_const_string, loc);
@@ -438,7 +541,7 @@ public class guide_manage : MonoBehaviour
                     {
                         click(loc_if);
                     }
-                    else if(first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().DownBlk != 103)
+                    else if (first_blk.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().DownBlk_btn.GetComponent<BlkOnNoteComp>().DownBlk != 103)
                     {
                         Vector2 loc = new Vector2(364, 49);
                         drag(loc_if, loc);
@@ -450,7 +553,6 @@ public class guide_manage : MonoBehaviour
                     else
                     {
                         click(loc_play);
-                        click_more.SetActive(true);
                     }
                     break;
                 case 9:

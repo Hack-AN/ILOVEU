@@ -54,18 +54,26 @@ public class MoveBtn : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         transform.position = eventData.position;    // 위치를 조금 변경해서 손가락이 블록을 가리지 않게 하자
         if (this.gameObject.name.CompareTo("btn_const_string") == 0)
         {
-            this.gameObject.GetComponent<RectTransform>().pivot = new Vector2(0, 0.5f);
+            //this.gameObject.GetComponent<RectTransform>().pivot = new Vector2(1f, -0.5f);
+            //this.gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-this.gameObject.GetComponent<RectTransform>().rect.width / 2, this.gameObject.GetComponent<RectTransform>().rect.height/2);
             this.gameObject.GetComponent<BoxCollider2D>().size = new Vector2(200, 60);
+        }
+        else
+        {
+            //this.gameObject.GetComponent<RectTransform>().pivot = new Vector2(1f, -0.5f);
+            //this.gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-this.gameObject.GetComponent<RectTransform>().rect.width / 2, this.gameObject.GetComponent<RectTransform>().rect.height / 2);
         }
     }
 
     public void OnEndDrag(PointerEventData eventData)   // 블록 원상 복귀
     {
+        //this.gameObject.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
         SwapObjHierarchy(changeempty, transform);
         transform.position = location;
         if (this.gameObject.name.CompareTo("btn_const_string") == 0)
         {
-            this.gameObject.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
+            //this.gameObject.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
+            //this.gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0,0);
             this.gameObject.GetComponent<BoxCollider2D>().size = new Vector2(64.77f, 68.61f);
         }
     }
@@ -75,6 +83,7 @@ public class MoveBtn : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     void OnTriggerStay2D(Collider2D other)  // 반투명 블록 이미지 붙여놓기
     {
+        //this.gameObject.GetComponent<RectTransform>().pivot = new Vector2(0f, 0f);
         if (other.CompareTag("BlkColNum"))
         {
             other.gameObject.transform.parent.GetComponent<BlkOnNoteComp>().isdrop = false;
@@ -88,21 +97,23 @@ public class MoveBtn : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                     other.gameObject.transform.parent.transform.Find("DownCol").gameObject.SetActive(false);
                     isrightcol = true;
 
+                    /*
                     other.gameObject.GetComponent<Image>().sprite = this.gameObject.GetComponent<Image>().sprite;
                     other.gameObject.GetComponent<Image>().SetNativeSize();
-
-                    other.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(this.gameObject.GetComponent<RectTransform>().rect.width, other.gameObject.GetComponent<RectTransform>().rect.height);
-
-
                     float x = other.gameObject.transform.parent.transform.position.x + other.gameObject.transform.parent.GetComponent<RectTransform>().rect.width / 2 + this.gameObject.transform.GetComponent<RectTransform>().rect.width / 2; ;
                     other.gameObject.transform.position = new Vector3(x, other.transform.position.y, other.transform.position.z);
 
-                    /*
+                    */
+                    other.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(this.gameObject.GetComponent<RectTransform>().rect.width * 2, this.gameObject.GetComponent<RectTransform>().rect.height * 2);
+
+
+                    
+                    
                     other.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = this.gameObject.GetComponent<Image>().sprite;
                     other.transform.GetChild(0).gameObject.GetComponent<Image>().SetNativeSize();
-                    float x = other.gameObject.transform.parent.transform.position.x + other.gameObject.transform.parent.GetComponent<RectTransform>().rect.width / 2 + this.gameObject.transform.GetComponent<RectTransform>().rect.width / 2; ;
+                    float x = other.gameObject.transform.parent.transform.position.x + other.gameObject.transform.parent.GetComponent<RectTransform>().rect.width / 2 + this.gameObject.transform.GetComponent<RectTransform>().rect.width / 2;
                     other.transform.GetChild(0).transform.position = new Vector3(x, other.transform.position.y, other.transform.position.z);
-                    */
+                    
                     Debug.Log("right");
                     Debug.Log(btn_numbering);
 
@@ -120,17 +131,20 @@ public class MoveBtn : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                         other.gameObject.transform.parent.transform.Find("RightCol").gameObject.SetActive(false);
                     isdowncol = true;
 
-
+                    /*
                     other.gameObject.GetComponent<Image>().sprite = this.gameObject.GetComponent<Image>().sprite;
                     other.GetComponent<Image>().SetNativeSize();
-
-                    other.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(this.gameObject.GetComponent<RectTransform>().rect.width , other.gameObject.GetComponent<RectTransform>().rect.height);
 
                     float x = other.gameObject.transform.parent.transform.position.x + (this.gameObject.GetComponent<RectTransform>().rect.width / 2 - other.gameObject.transform.parent.GetComponent<RectTransform>().rect.width / 2);
                     float y = other.gameObject.transform.parent.transform.position.y - other.gameObject.transform.parent.GetComponent<RectTransform>().rect.height;
 
                     other.gameObject.transform.position = new Vector3(x, y, other.transform.position.z);
-                    /*
+                    */
+                    other.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(this.gameObject.GetComponent<RectTransform>().rect.width * 3 , this.gameObject.GetComponent<RectTransform>().rect.height * 3);
+
+
+
+                    
                     other.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = this.gameObject.GetComponent<Image>().sprite;
                     other.transform.GetChild(0).gameObject.GetComponent<Image>().SetNativeSize();
 
@@ -138,7 +152,7 @@ public class MoveBtn : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                     float y = other.gameObject.transform.parent.transform.position.y - other.gameObject.transform.parent.GetComponent<RectTransform>().rect.height;
 
                     other.transform.GetChild(0).transform.position = new Vector3(x, y, other.transform.position.z);
-                    */
+                    
                     Debug.Log("down");
                     Debug.Log(btn_numbering);
                     
@@ -159,8 +173,10 @@ public class MoveBtn : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
             //isdowncol = false;
             //isrightcol = false;
 
+            /*
             other.GetComponent<Image>().sprite = null;
             other.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
+            */
 
             /*
             if(other.gameObject.name == "RightCol" && other.gameObject.transform.parent.GetComponent<BlkOnNoteComp>().isdragging == false)
@@ -169,11 +185,12 @@ public class MoveBtn : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                 other.transform.position = new Vector3(other.gameObject.transform.parent.transform.position.x, other.gameObject.transform.parent.transform.position.y - other.gameObject.transform.parent.GetComponent<RectTransform>().rect.height / 2, other.gameObject.transform.parent.transform.position.z);
                 */
 
-            /*
+            other.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(0,0);
+
             other.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = null;
             other.transform.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
             other.transform.GetChild(0).transform.position = new Vector3(other.gameObject.transform.parent.transform.position.x, other.gameObject.transform.parent.transform.position.y, other.gameObject.transform.parent.transform.position.z);
-            */
+            
             //Color temp_color = other.gameObject.GetComponent<Image>().color;
             //temp_color.a = 0;
             /*if (other.gameObject.name == "RightCol" && other.gameObject.transform.parent.GetComponent<BlkOnNoteComp>().isdrop == false)
@@ -224,7 +241,7 @@ public class MoveBtn : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
             else if (other.gameObject.transform.parent.GetComponent<BlkOnNoteComp>().ismostleft == true && isrightcol == false && other.gameObject.name == "DownCol" && other.gameObject.transform.parent.GetComponent<BlkOnNoteComp>().isdrop == true)
             {
                 other.transform.position = new Vector3(other.gameObject.transform.parent.transform.position.x, other.gameObject.transform.parent.transform.position.y - other.gameObject.transform.parent.GetComponent<RectTransform>().rect.height / 2, other.gameObject.transform.parent.transform.position.z);
-
+                
                 if (!(btn_numbering >= 21 && btn_numbering <= 30) && btn_numbering >= 1)   // 여기에 놔도 되는 블록인지 조건 검사 필요
                 {
                     
